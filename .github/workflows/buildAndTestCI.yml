@@ -20,10 +20,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.300
-    - name: Install dependencies
-      run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
+      working-directory: src/CheckoutChallenge.PaymentGateway
     - name: Run Tests
       run: dotnet test --no-restore --verbosity normal
+      working-directory: src/CheckoutChallenge.PaymentGateway
 
