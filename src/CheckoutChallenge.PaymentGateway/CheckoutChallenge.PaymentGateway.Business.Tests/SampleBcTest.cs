@@ -28,12 +28,5 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
             //Assert
             Assert.Equal(42, returnedValue);
         }
-
-        [Fact]
-        public void FailingTestJustToSeeTheCIDoingStuff()
-        {
-            //True == False
-            Assert.True(false);
-        }
     }
 }
