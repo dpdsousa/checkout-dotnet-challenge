@@ -21,9 +21,9 @@ jobs:
       with:
         dotnet-version: 3.1.300
     - name: Build
-      run: dotnet build --configuration Release --no-restore
-      working-directory: src/CheckoutChallenge.PaymentGateway
+      run: dotnet build --configuration Release
+      working-directory: ./src/CheckoutChallenge.PaymentGateway
     - name: Run Tests
-      run: dotnet test --no-restore --verbosity normal
-      working-directory: src/CheckoutChallenge.PaymentGateway
+      run: dotnet test
+      working-directory: ./src/CheckoutChallenge.PaymentGateway
 
