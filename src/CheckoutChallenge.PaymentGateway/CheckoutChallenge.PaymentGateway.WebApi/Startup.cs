@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace CheckoutChallenge.PaymentGateway.WebApi
 {
@@ -24,6 +25,11 @@ namespace CheckoutChallenge.PaymentGateway.WebApi
         {
             services.AddControllers();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = typeof(Startup).Namespace, Version = "v1" });
+            });
+
             services.AddTransient<ISampleBc, SampleBc>();
             services.AddTransient<ISampleRepository, SampleRepository>();
         }
@@ -39,6 +45,12 @@ namespace CheckoutChallenge.PaymentGateway.WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseEndpoints(endpoints =>
             {
