@@ -1,4 +1,4 @@
-﻿namespace CheckoutChallenge.PaymentGateway.Domain
+﻿namespace CheckoutChallenge.PaymentGateway.Domain.Entities
 {
     public class SampleEntity
     {

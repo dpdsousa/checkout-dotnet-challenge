@@ -8,7 +8,6 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
     {
         private readonly ISampleBc _sampleBc;
 
-
         public SampleBcTest()
         {
             var serviceProvider = TestEnvironmentSetup.ConfigServices();

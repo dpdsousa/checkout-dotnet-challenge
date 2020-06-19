@@ -1,6 +1,6 @@
 using CheckoutChallenge.PaymentGateway.Business;
 using CheckoutChallenge.PaymentGateway.Business.Interfaces;
-using CheckoutChallenge.PaymentGateway.Data;
+using CheckoutChallenge.PaymentGateway.Data.Repositories;
 using CheckoutChallenge.PaymentGateway.Data.GenericImplementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

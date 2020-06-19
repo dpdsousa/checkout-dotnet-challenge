@@ -1,4 +1,4 @@
-﻿using System;
+﻿using CheckoutChallenge.PaymentGateway.Data.Repositories;
 
 namespace CheckoutChallenge.PaymentGateway.Data.GenericImplementation
 {

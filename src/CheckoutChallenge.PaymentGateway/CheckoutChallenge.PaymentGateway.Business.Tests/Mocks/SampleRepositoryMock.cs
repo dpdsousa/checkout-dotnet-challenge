@@ -1,4 +1,4 @@
-﻿using CheckoutChallenge.PaymentGateway.Data;
+﻿using CheckoutChallenge.PaymentGateway.Data.Repositories;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Tests.Mocks
 {

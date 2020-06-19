@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Data\CheckoutChallenge.PaymentGateway.Data.csproj" />
+    <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Domain\CheckoutChallenge.PaymentGateway.Domain.csproj" />
   </ItemGroup>
 
 </Project>

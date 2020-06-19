@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Domain\CheckoutChallenge.PaymentGateway.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
