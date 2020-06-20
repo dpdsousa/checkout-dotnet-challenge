@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CheckoutChallenge.PaymentGateway.Business.Interfaces;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
@@ -27,7 +23,7 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
             return Ok(_merchantBc.Get(id));
         }
 
-
+        //TODO: Add DTOs and handle responses
         [HttpPost]
         public IActionResult Create(Merchant merchant)
         {

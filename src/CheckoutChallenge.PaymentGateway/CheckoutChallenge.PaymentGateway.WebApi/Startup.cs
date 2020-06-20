@@ -1,4 +1,3 @@
-using CheckoutChallenge.PaymentGateway.Business;
 using CheckoutChallenge.PaymentGateway.Business.Interfaces;
 using CheckoutChallenge.PaymentGateway.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -42,12 +41,10 @@ namespace CheckoutChallenge.PaymentGateway.WebApi
                 serviceProvider.GetRequiredService<IOptions<MongoSettings>>().Value);
 
             //Business Components
-            services.AddTransient<ISampleBc, SampleBc>();
             services.AddTransient<IMerchantBc, MerchantBc>();
 
             //Repositories
             services.AddTransient<IMongoContext, MongoContext>();
-            services.AddTransient<ISampleRepository, SampleRepository>();
             services.AddTransient<IMerchantRepository, MerchantRepository>();
         }
 

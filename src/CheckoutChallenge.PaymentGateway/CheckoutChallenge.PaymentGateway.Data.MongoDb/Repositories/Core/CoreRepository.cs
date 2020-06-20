@@ -1,7 +1,6 @@
 ﻿using CheckoutChallenge.PaymentGateway.Data.Context;
 using CheckoutChallenge.PaymentGateway.Data.Repositories.Core;
 using MongoDB.Driver;
-using System;
 
 namespace CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories.Core
 {
