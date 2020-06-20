@@ -21,9 +21,9 @@ jobs:
       with:
         dotnet-version: 3.1.300
     - name: Build
-      run: dotnet build --configuration Release
-      working-directory: ./src/CheckoutChallenge.PaymentGateway/CheckoutChallenge.PaymentGateway.sln
+      run: dotnet build CheckoutChallenge.PaymentGateway.sln --configuration Release
+      working-directory: ./src/CheckoutChallenge.PaymentGateway
     - name: Run Tests
-      run: dotnet test
-      working-directory: ./src/CheckoutChallenge.PaymentGateway/CheckoutChallenge.PaymentGateway.sln
+      run: dotnet test CheckoutChallenge.PaymentGateway.sln
+      working-directory: ./src/CheckoutChallenge.PaymentGateway
 
