@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Business\CheckoutChallenge.PaymentGateway.Business.csproj" />
-    <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Data.GenericImplementation\CheckoutChallenge.PaymentGateway.Data.GenericImplementation.csproj" />
     <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Data\CheckoutChallenge.PaymentGateway.Data.csproj" />
     <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Domain\CheckoutChallenge.PaymentGateway.Domain.csproj" />
   </ItemGroup>

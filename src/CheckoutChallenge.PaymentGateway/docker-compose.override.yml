@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  paymentGatewayApi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:4000
+    ports:
+      - "4000:4000"

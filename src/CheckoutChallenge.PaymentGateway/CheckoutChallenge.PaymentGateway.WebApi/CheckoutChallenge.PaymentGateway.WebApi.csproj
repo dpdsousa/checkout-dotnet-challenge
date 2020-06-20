@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Business\CheckoutChallenge.PaymentGateway.Business.csproj" />
-    <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Data.GenericImplementation\CheckoutChallenge.PaymentGateway.Data.GenericImplementation.csproj" />
+    <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Data.MongoDb\CheckoutChallenge.PaymentGateway.Data.MongoDb.csproj" />
     <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Data\CheckoutChallenge.PaymentGateway.Data.csproj" />
   </ItemGroup>
 

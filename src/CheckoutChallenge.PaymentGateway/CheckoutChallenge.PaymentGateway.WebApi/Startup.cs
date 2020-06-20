@@ -1,13 +1,19 @@
 using CheckoutChallenge.PaymentGateway.Business;
 using CheckoutChallenge.PaymentGateway.Business.Interfaces;
 using CheckoutChallenge.PaymentGateway.Data.Repositories;
-using CheckoutChallenge.PaymentGateway.Data.GenericImplementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
+using CheckoutChallenge.PaymentGateway.Data;
+using CheckoutChallenge.PaymentGateway.Data.MongoDb;
+using CheckoutChallenge.PaymentGateway.Data.Context;
+using CheckoutChallenge.PaymentGateway.Data.MongoDb.Context;
+using CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories;
+using CheckoutChallenge.PaymentGateway.Business.Components;
 
 namespace CheckoutChallenge.PaymentGateway.WebApi
 {
@@ -25,13 +31,24 @@ namespace CheckoutChallenge.PaymentGateway.WebApi
         {
             services.AddControllers();
 
+            services.Configure<MongoSettings>(Configuration.GetSection("MongoDbSettings"));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = typeof(Startup).Namespace, Version = "v1" });
             });
 
+            services.AddSingleton<IDatabaseSettings>(serviceProvider => 
+                serviceProvider.GetRequiredService<IOptions<MongoSettings>>().Value);
+
+            //Business Components
             services.AddTransient<ISampleBc, SampleBc>();
+            services.AddTransient<IMerchantBc, MerchantBc>();
+
+            //Repositories
+            services.AddTransient<IMongoContext, MongoContext>();
             services.AddTransient<ISampleRepository, SampleRepository>();
+            services.AddTransient<IMerchantRepository, MerchantRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
