@@ -1,5 +1,6 @@
 ﻿using CheckoutChallenge.PaymentGateway.Data.Context;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace CheckoutChallenge.PaymentGateway.Data.MongoDb.Context
@@ -11,6 +12,7 @@ namespace CheckoutChallenge.PaymentGateway.Data.MongoDb.Context
 
         public MongoContext(IOptions<MongoSettings> configuration)
         {
+            BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
             MongoClient = new MongoClient(configuration.Value.ConnectionString);
             Db = MongoClient.GetDatabase(configuration.Value.DatabaseName);
         }

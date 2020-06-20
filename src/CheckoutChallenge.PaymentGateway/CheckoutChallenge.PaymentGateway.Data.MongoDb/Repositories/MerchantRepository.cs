@@ -15,8 +15,7 @@ namespace CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories
 
         public Merchant Get(string name)
         {
-            var filter = Builders<Merchant>.Filter.Eq("name", name);
-            return _dbCollection.Find(filter).FirstOrDefault();
+            return _dbCollection.Find(x => x.Name == name).FirstOrDefault();
         }
     }
 }
