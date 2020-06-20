@@ -1,4 +1,4 @@
-name: Build and Test CI
+name: Build and Test
 
 on : 
   push:
@@ -22,8 +22,8 @@ jobs:
         dotnet-version: 3.1.300
     - name: Build
       run: dotnet build --configuration Release
-      working-directory: ./src/CheckoutChallenge.PaymentGateway
+      working-directory: ./src/CheckoutChallenge.PaymentGateway/CheckoutChallenge.PaymentGateway.sln
     - name: Run Tests
       run: dotnet test
-      working-directory: ./src/CheckoutChallenge.PaymentGateway
+      working-directory: ./src/CheckoutChallenge.PaymentGateway/CheckoutChallenge.PaymentGateway.sln
 
