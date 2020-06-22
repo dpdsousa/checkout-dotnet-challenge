@@ -21,7 +21,7 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
         [Route("{id}")]
         public IActionResult Get(Guid id)
         {
-            return Ok();
+            return Ok(_paymentBc.Get(id));
         }
 
         [HttpPost]

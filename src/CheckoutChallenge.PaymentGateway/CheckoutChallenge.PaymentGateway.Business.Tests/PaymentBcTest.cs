@@ -43,6 +43,26 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
             Assert.Throws<ValidationException>(() => _paymentBc.Process(payment));
         }
 
+        [Fact]
+        public void Get_ShouldReturnPayment_IfPaymentExists()
+        {
+            var paymentId = Guid.NewGuid();
+
+            var payment = _paymentBc.Get(paymentId);
+
+            Assert.NotNull(payment);
+            Assert.Equal(paymentId, payment.Id);
+        }
+
+        [Fact]
+        public void Get_ShouldReturnNull_IfPaymentNotExists()
+        {
+            var paymentId = default(Guid);
+
+            var payment = _paymentBc.Get(paymentId);
+
+            Assert.Null(payment);
+        }
 
         private Payment GeneratePayment()
         {

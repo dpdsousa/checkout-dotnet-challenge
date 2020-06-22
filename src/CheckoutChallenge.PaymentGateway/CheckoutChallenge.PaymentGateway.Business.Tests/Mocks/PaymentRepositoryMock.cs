@@ -13,7 +13,13 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests.Mocks
 
         public Payment Get(Guid key)
         {
-            throw new NotImplementedException();
+            var payment = new Payment { Id = key };
+            if (key == default)
+            {
+                payment = null;
+            }
+
+            return payment;
         }
     }
 }

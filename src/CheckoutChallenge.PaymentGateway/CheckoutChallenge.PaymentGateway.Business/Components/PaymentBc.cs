@@ -17,7 +17,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
 
         public Payment Get(Guid id)
         {
-            throw new NotImplementedException();
+            return _paymentRepository.Get(id);
         }
 
         public Payment Process(Payment payment)
