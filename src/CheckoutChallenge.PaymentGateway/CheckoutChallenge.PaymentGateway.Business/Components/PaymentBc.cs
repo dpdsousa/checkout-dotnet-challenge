@@ -2,8 +2,6 @@
 using CheckoutChallenge.PaymentGateway.Business.Validators;
 using CheckoutChallenge.PaymentGateway.Data.Repositories;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
-using CheckoutChallenge.PaymentGateway.Domain.Exceptions;
-using FluentValidation.Results;
 using System;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Components

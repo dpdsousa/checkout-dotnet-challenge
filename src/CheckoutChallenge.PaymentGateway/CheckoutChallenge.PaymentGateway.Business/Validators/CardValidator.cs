@@ -21,6 +21,12 @@ namespace CheckoutChallenge.PaymentGateway.Business.Validators
                 .When(x => !string.IsNullOrWhiteSpace(x.Cvv))
                 .WithMessage("Cvv must have 3 digits.");
 
+            RuleFor(x => x.ExpiryYear)
+                .InclusiveBetween(1, 9999).WithMessage("Expiry year must be between {From} and {To}.");
+
+            RuleFor(x => x.ExpiryMonth)
+                .InclusiveBetween(1, 12).WithMessage("Expiry month must be between {From} and {To}.");
+
             RuleFor(x => x).Must(x =>
             {
                 var isValid = true;
@@ -30,7 +36,9 @@ namespace CheckoutChallenge.PaymentGateway.Business.Validators
                     isValid = false;
                 }
                 return isValid;
-            }).WithMessage("Card's date has expired");
+            })
+            .When(x => x.ExpiryMonth >= 1 && x.ExpiryMonth <= 12 && x.ExpiryYear > 0 && x.ExpiryYear <= 9999)
+            .WithMessage("Card's date has expired.");
 
 
         }

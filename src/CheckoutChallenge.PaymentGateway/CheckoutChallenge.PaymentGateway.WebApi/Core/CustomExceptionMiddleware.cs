@@ -1,5 +1,4 @@
 ﻿using CheckoutChallenge.PaymentGateway.Domain.Exceptions;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
