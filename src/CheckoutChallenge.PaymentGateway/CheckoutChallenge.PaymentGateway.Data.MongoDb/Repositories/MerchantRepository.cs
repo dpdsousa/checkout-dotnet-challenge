@@ -4,6 +4,7 @@ using CheckoutChallenge.PaymentGateway.Data.Repositories;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using MongoDB.Driver;
 using System;
+using System.Threading.Tasks;
 
 namespace CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories
 {
@@ -13,9 +14,9 @@ namespace CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories
         {
         }
 
-        public Merchant Get(string name)
+        public async Task<Merchant> Get(string name)
         {
-            return _dbCollection.Find(x => x.Name == name).FirstOrDefault();
+            return await _dbCollection.Find(x => x.Name == name).FirstOrDefaultAsync();
         }
     }
 }

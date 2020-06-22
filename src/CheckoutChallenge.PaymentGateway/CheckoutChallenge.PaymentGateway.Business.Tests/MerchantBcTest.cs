@@ -19,13 +19,13 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
-        public void Add_ShouldCreateMerchant_WhenAllIsWell()
+        public async void Add_ShouldCreateMerchant_WhenAllIsWell()
         {
             //Arrange
             var merchant = new Merchant { Name = "TestMerchant" };
 
             //Act
-            var createdMerchant = _merchantBc.Add(merchant);
+            var createdMerchant = await _merchantBc.Add(merchant);
 
             //Assert
             Assert.NotNull(createdMerchant);
@@ -34,32 +34,32 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
-        public void Add_ShouldThrowException_WhenMerchantWithSameNameExists()
+        public async void Add_ShouldThrowException_WhenMerchantWithSameNameExists()
         {
             var merchant = new Merchant { Name = "Exists" };
 
-            var exception = Assert.Throws<BusinessException>(() => _merchantBc.Add(merchant));
+            var exception = await Assert.ThrowsAsync<BusinessException>(() => _merchantBc.Add(merchant));
 
             Assert.Equal(exception.ExceptionCode, BusinessExceptionCodes.MerchantAlreadyExists);
         }
 
         [Fact]
-        public void Get_ShouldReturnMerchant_WhenMerchantExists()
+        public async void Get_ShouldReturnMerchant_WhenMerchantExists()
         {
             var merchant = new Merchant { Id = Guid.NewGuid(), Name = "Exists" };
 
-            var dbMerchant = _merchantBc.Get(merchant.Id);
+            var dbMerchant = await _merchantBc.Get(merchant.Id);
 
             Assert.NotNull(dbMerchant);
             Assert.Equal(merchant.Id, dbMerchant.Id);
         }
 
         [Fact]
-        public void Get_ShouldReturnNull_WhenMerchantDoesntExist()
+        public async void Get_ShouldReturnNull_WhenMerchantDoesntExist()
         {
             var merchantId = default(Guid);
 
-            var dbMerchant = _merchantBc.Get(merchantId);
+            var dbMerchant = await _merchantBc.Get(merchantId);
 
             Assert.Null(dbMerchant);
         }

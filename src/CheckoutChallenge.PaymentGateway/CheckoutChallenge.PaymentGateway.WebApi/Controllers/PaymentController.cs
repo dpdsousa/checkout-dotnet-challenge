@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CheckoutChallenge.PaymentGateway.Business.Interfaces;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using CheckoutChallenge.PaymentGateway.WebApi.Core;
@@ -19,17 +20,17 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult Get(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            return Ok(_paymentBc.Get(id));
+            return Ok(await _paymentBc.Get(id));
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(BadRequestMessage), 400)]
         [ProducesResponseType(typeof(ConflictMessage), 409)]
-        public IActionResult RequestPayment(Payment payment)
+        public async Task<IActionResult> RequestPayment(Payment payment)
         {
-            return Ok(_paymentBc.Process(payment));
+            return Ok(await _paymentBc.Process(payment));
         }
     }
 }

@@ -1,17 +1,18 @@
 ﻿using CheckoutChallenge.PaymentGateway.Data.Repositories;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Tests.Mocks
 {
     public class PaymentRepositoryMock : IPaymentRepository
     {
-        public Payment Add(Payment entity)
+        public Task<Payment> Add(Payment entity)
         {
-            return entity;
+            return Task.FromResult(entity);
         }
 
-        public Payment Get(Guid key)
+        public Task<Payment> Get(Guid key)
         {
             var payment = new Payment { Id = key };
             if (key == default)
@@ -19,7 +20,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests.Mocks
                 payment = null;
             }
 
-            return payment;
+            return Task.FromResult(payment);
         }
     }
 }

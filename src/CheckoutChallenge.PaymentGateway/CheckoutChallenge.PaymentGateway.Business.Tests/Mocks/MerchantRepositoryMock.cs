@@ -1,17 +1,18 @@
 ﻿using CheckoutChallenge.PaymentGateway.Data.Repositories;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Tests.Mocks
 {
     public class MerchantRepositoryMock : IMerchantRepository
     {
-        public Merchant Add(Merchant entity)
+        public Task<Merchant> Add(Merchant entity)
         {
-            return entity;
+            return Task.FromResult(entity);
         }
 
-        public Merchant Get(Guid key)
+        public Task<Merchant> Get(Guid key)
         {
             var merchant = new Merchant { Id = key, Name = "Exists" };
             if (key == default)
@@ -19,17 +20,17 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests.Mocks
                 merchant = null;
             }
 
-            return merchant;
+            return Task.FromResult(merchant);
         }
 
-        public Merchant Get(string name)
+        public Task<Merchant> Get(string name)
         {
             var merchant = new Merchant { Id = Guid.NewGuid(), Name = "Exists" };
             if (name != "Exists")
             {
                 merchant = null;
             }
-            return merchant;
+            return Task.FromResult(merchant);
         }
     }
 }

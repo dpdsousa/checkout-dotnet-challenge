@@ -33,33 +33,33 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
-        public void Process_ShouldThrowValidationException_WhenPaymentValuesAreWrong()
+        public async void Process_ShouldThrowValidationException_WhenPaymentValuesAreWrong()
         {
             //Arrange
             var payment = GeneratePayment();
             payment.Card.ExpiryYear = 2012;
 
             //Act
-            Assert.ThrowsAsync<BusinessException>(() => _paymentBc.Process(payment));
+            await Assert.ThrowsAsync<ValidationException>(() => _paymentBc.Process(payment));
         }
 
         [Fact]
-        public void Get_ShouldReturnPayment_IfPaymentExists()
+        public async void Get_ShouldReturnPayment_IfPaymentExists()
         {
             var paymentId = Guid.NewGuid();
 
-            var payment = _paymentBc.Get(paymentId);
+            var payment = await _paymentBc.Get(paymentId);
 
             Assert.NotNull(payment);
             Assert.Equal(paymentId, payment.Id);
         }
 
         [Fact]
-        public void Get_ShouldReturnNull_IfPaymentNotExists()
+        public async void Get_ShouldReturnNull_IfPaymentNotExists()
         {
             var paymentId = default(Guid);
 
-            var payment = _paymentBc.Get(paymentId);
+            var payment = await _paymentBc.Get(paymentId);
 
             Assert.Null(payment);
         }

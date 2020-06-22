@@ -1,11 +1,12 @@
 ﻿using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Interfaces
 {
     public interface IMerchantBc
     {
-        Merchant Get(Guid id);
-        Merchant Add(Merchant merchant);
+        Task<Merchant> Get(Guid id);
+        Task<Merchant> Add(Merchant merchant);
     }
 }

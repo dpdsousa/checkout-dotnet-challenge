@@ -19,9 +19,9 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
             _bankApiClient = bankApiClient;
         }
 
-        public Payment Get(Guid id)
+        public async Task<Payment> Get(Guid id)
         {
-            return _paymentRepository.Get(id);
+            return await _paymentRepository.Get(id);
         }
 
         public async Task<Payment> Process(Payment payment)
@@ -34,7 +34,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
             var transactionResults = await _bankApiClient.PostTransaction(payment);
 
             payment.Id = Guid.NewGuid();
-            return _paymentRepository.Add(payment);
+            return await _paymentRepository.Add(payment);
         }
     }
 }

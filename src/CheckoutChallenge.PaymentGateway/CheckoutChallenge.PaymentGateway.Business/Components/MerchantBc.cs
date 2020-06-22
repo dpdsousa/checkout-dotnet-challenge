@@ -3,6 +3,7 @@ using CheckoutChallenge.PaymentGateway.Data.Repositories;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using CheckoutChallenge.PaymentGateway.Domain.Exceptions;
 using System;
+using System.Threading.Tasks;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Components
 {
@@ -15,14 +16,14 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
             _merchantRepository = merchantRepository;
         }
 
-        public Merchant Get(Guid id)
+        public async Task<Merchant> Get(Guid id)
         {
-            return _merchantRepository.Get(id);
+            return await _merchantRepository.Get(id);
         }
 
-        public Merchant Add(Merchant merchant)
+        public async Task<Merchant> Add(Merchant merchant)
         {
-            var dbMerchant = _merchantRepository.Get(merchant.Name);
+            var dbMerchant = await _merchantRepository.Get(merchant.Name);
             if(dbMerchant != null)
             {
                 throw new BusinessException(
@@ -31,7 +32,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
             }
 
             merchant.Id = Guid.NewGuid();
-            return _merchantRepository.Add(merchant);
+            return await _merchantRepository.Add(merchant);
         }
     }
 }

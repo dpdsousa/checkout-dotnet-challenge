@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CheckoutChallenge.PaymentGateway.Business.Interfaces;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using CheckoutChallenge.PaymentGateway.WebApi.Core;
@@ -17,21 +18,20 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
             _merchantBc = merchantBc;
         }
 
-
         [HttpGet]
         [Route("{id}")]
-        public IActionResult Get(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            return Ok(_merchantBc.Get(id));
+            return Ok(await _merchantBc.Get(id));
         }
 
         //TODO: Add DTOs and handle responses
         [HttpPost]
         [ProducesResponseType(typeof(BadRequestMessage), 400)]
         [ProducesResponseType(typeof(ConflictMessage), 409)]
-        public IActionResult Create(Merchant merchant)
+        public async Task<IActionResult> Create(Merchant merchant)
         {
-            return Ok(_merchantBc.Add(merchant));
+            return Ok(await _merchantBc.Add(merchant));
         }
     }
 }

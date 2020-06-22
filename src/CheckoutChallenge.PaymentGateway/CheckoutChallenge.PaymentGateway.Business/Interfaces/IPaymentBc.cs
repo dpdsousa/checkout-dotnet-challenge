@@ -6,7 +6,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Interfaces
 {
     public interface IPaymentBc
     {
-        Payment Get(Guid id);
+        Task<Payment> Get(Guid id);
         Task<Payment> Process(Payment payment);
     }
 }

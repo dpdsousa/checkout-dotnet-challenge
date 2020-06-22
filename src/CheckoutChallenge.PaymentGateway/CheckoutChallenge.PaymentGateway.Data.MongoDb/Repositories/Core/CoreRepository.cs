@@ -1,6 +1,7 @@
 ﻿using CheckoutChallenge.PaymentGateway.Data.Context;
 using CheckoutChallenge.PaymentGateway.Data.Repositories.Core;
 using MongoDB.Driver;
+using System.Threading.Tasks;
 
 namespace CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories.Core
 {
@@ -15,16 +16,16 @@ namespace CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories.Core
             _dbCollection = _mongoContext.GetCollection<TEntity>(typeof(TEntity).Name);
         }
 
-        public TEntity Add(TEntity entity)
+        public async Task<TEntity> Add(TEntity entity)
         {
-            _dbCollection.InsertOne(entity);
+            await _dbCollection.InsertOneAsync(entity);
             return entity;
         }
 
-        public TEntity Get(TKey key)
+        public async Task<TEntity> Get(TKey key)
         {
             var filter = Builders<TEntity>.Filter.Eq("_id", key);
-            return _dbCollection.Find(filter).FirstOrDefault();
+            return await _dbCollection.Find(filter).FirstOrDefaultAsync();
         }
     }
 }
