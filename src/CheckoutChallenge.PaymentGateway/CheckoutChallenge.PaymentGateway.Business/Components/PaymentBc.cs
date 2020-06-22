@@ -22,8 +22,8 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
 
         public Payment Process(Payment payment)
         {
-            var cardValidator = new CardValidator();
-            var validationResult = cardValidator.Validate(payment.Card);
+            var paymentValidator = new PaymentValidator();
+            var validationResult = paymentValidator.Validate(payment);
 
             HandleErrors.HandleValidatorResult(validationResult);
 
