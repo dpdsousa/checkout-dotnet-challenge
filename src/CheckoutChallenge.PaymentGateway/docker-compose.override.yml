@@ -7,3 +7,11 @@ services:
       - ASPNETCORE_URLS=http://+:4000
     ports:
       - "4000:4000"
+
+  bankMockApi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:4500
+    ports:
+      - "4500:4500"
+

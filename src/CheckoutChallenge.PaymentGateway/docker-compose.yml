@@ -8,6 +8,13 @@ services:
         ports:
             - 27017:27017
 
+    bankMockApi:
+        image: ${DOCKER_REGISTRY-}checkoutchallengebankservicemock
+        container_name: Container_BankMockApi
+        build:
+            context: .
+            dockerfile: CheckoutChallenge.BankServiceMock/Dockerfile
+
     paymentGatewayApi:
         image: ${DOCKER_REGISTRY-}checkoutchallengepaymentgatewaywebapi
         container_name: Container_PaymentGatewayApi
@@ -15,6 +22,5 @@ services:
             context: .
             dockerfile: CheckoutChallenge.PaymentGateway.WebApi/Dockerfile
         depends_on:
+            - bankMockApi
             - mongoDb
-
-
