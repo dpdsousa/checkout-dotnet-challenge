@@ -19,7 +19,7 @@ namespace CheckoutChallenge.PaymentGateway.Domain.ApiClients
             var result = await _httpClient.PostAsJsonAsync("api/transaction", payment);
             if (!result.IsSuccessStatusCode)
             {
-
+                //TODO: This
             }
             return result.Content.ReadAsJsonAsync<BankTransactionInfo>().Result;
         }

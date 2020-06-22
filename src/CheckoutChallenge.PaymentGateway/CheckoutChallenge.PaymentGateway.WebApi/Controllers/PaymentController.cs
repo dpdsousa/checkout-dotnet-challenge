@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using CheckoutChallenge.PaymentGateway.Business.Interfaces;
-using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using CheckoutChallenge.PaymentGateway.WebApi.Core;
+using CheckoutChallenge.PaymentGateway.WebApi.DTOs;
+using CheckoutChallenge.PaymentGateway.WebApi.DTOs.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
@@ -22,15 +23,15 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
         [Route("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            return Ok(await _paymentBc.Get(id));
+            return Ok(PaymentMappers.Map(await _paymentBc.Get(id)));
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(BadRequestMessage), 400)]
         [ProducesResponseType(typeof(ConflictMessage), 409)]
-        public async Task<IActionResult> RequestPayment(Payment payment)
+        public async Task<IActionResult> RequestPayment(PaymentRequestDto paymentRequest)
         {
-            return Ok(await _paymentBc.Process(payment));
+            return Ok(await _paymentBc.Process(PaymentMappers.Map(paymentRequest)));
         }
     }
 }
