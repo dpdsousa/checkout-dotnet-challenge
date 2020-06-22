@@ -1,11 +1,12 @@
 ﻿using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using System;
+using System.Threading.Tasks;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Interfaces
 {
     public interface IPaymentBc
     {
         Payment Get(Guid id);
-        Payment Process(Payment payment);
+        Task<Payment> Process(Payment payment);
     }
 }

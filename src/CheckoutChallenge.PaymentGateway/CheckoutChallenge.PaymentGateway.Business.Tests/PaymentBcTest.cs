@@ -19,13 +19,13 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
-        public void Process_ShouldCreatePayment_WhenAllIsWell()
+        public async void Process_ShouldCreatePayment_WhenAllIsWell()
         {
             //Arrange
             var payment = GeneratePayment();
 
             //Act
-            var createdPayment = _paymentBc.Process(payment);
+            var createdPayment = await _paymentBc.Process(payment);
 
             //Assert
             Assert.NotNull(createdPayment);
@@ -40,7 +40,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
             payment.Card.ExpiryYear = 2012;
 
             //Act
-            Assert.Throws<ValidationException>(() => _paymentBc.Process(payment));
+            Assert.ThrowsAsync<BusinessException>(() => _paymentBc.Process(payment));
         }
 
         [Fact]

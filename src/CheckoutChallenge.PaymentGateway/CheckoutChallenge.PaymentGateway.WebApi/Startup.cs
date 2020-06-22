@@ -14,6 +14,8 @@ using CheckoutChallenge.PaymentGateway.Data.MongoDb.Context;
 using CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories;
 using CheckoutChallenge.PaymentGateway.Business.Components;
 using CheckoutChallenge.PaymentGateway.WebApi.Core;
+using CheckoutChallenge.PaymentGateway.Domain.ApiClients;
+using System;
 
 namespace CheckoutChallenge.PaymentGateway.WebApi
 {
@@ -40,6 +42,12 @@ namespace CheckoutChallenge.PaymentGateway.WebApi
 
             services.AddSingleton<IDatabaseSettings>(serviceProvider => 
                 serviceProvider.GetRequiredService<IOptions<MongoSettings>>().Value);
+
+            services.AddHttpClient<IBankApiClient, BankApiClient>(client =>
+            {
+                var baseUrl = Configuration["BankServiceApiSettings:BaseUrl"];
+                client.BaseAddress = new Uri(baseUrl);
+            });
 
             services.AddTransient<IMerchantBc, MerchantBc>();
             services.AddTransient<IPaymentBc, PaymentBc>();

@@ -2,6 +2,7 @@
 using CheckoutChallenge.PaymentGateway.Business.Interfaces;
 using CheckoutChallenge.PaymentGateway.Business.Tests.Mocks;
 using CheckoutChallenge.PaymentGateway.Data.Repositories;
+using CheckoutChallenge.PaymentGateway.Domain.ApiClients;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Tests
@@ -18,6 +19,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
             services.AddTransient<IMerchantRepository, MerchantRepositoryMock>();
             services.AddTransient<IPaymentRepository, PaymentRepositoryMock>();
 
+            services.AddTransient<IBankApiClient, BankApiClientMock>();
 
             return services.BuildServiceProvider();
         } 
