@@ -13,7 +13,6 @@ using CheckoutChallenge.PaymentGateway.Data.Context;
 using CheckoutChallenge.PaymentGateway.Data.MongoDb.Context;
 using CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories;
 using CheckoutChallenge.PaymentGateway.Business.Components;
-using CheckoutChallenge.PaymentGateway.WebApi.Core;
 using CheckoutChallenge.PaymentGateway.Domain.ApiClients;
 using System;
 

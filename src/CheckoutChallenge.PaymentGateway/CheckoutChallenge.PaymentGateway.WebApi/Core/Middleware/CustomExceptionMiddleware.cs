@@ -8,7 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace CheckoutChallenge.PaymentGateway.WebApi.Core
+namespace CheckoutChallenge.PaymentGateway.WebApi.Core.Middleware
 {
     public class CustomExceptionMiddleware
     {
