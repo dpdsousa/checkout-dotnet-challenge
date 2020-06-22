@@ -13,8 +13,11 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
             var services = new ServiceCollection();
 
             services.AddTransient<IMerchantBc, MerchantBc>();
+            services.AddTransient<IPaymentBc, PaymentBc>();
 
             services.AddTransient<IMerchantRepository, MerchantRepositoryMock>();
+            services.AddTransient<IPaymentRepository, PaymentRepositoryMock>();
+
 
             return services.BuildServiceProvider();
         } 

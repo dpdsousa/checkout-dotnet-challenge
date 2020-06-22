@@ -19,7 +19,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
-        public void MerchantBc_ShouldCreateMerchant_WhenAllIsWell()
+        public void Add_ShouldCreateMerchant_WhenAllIsWell()
         {
             //Arrange
             var merchant = new Merchant { Name = "TestMerchant" };
@@ -34,7 +34,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
-        public void MerchantBc_ShouldThrowException_WhenMerchantWithSameNameExists()
+        public void Add_ShouldThrowException_WhenMerchantWithSameNameExists()
         {
             var merchant = new Merchant { Name = "Exists" };
 
@@ -42,7 +42,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
-        public void MerchantBc_ShouldReturnMerchant_WhenMerchantExists()
+        public void Get_ShouldReturnMerchant_WhenMerchantExists()
         {
             var merchant = new Merchant { Id = Guid.NewGuid(), Name = "Exists" };
 
@@ -53,7 +53,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
-        public void MerchantBc_ShouldReturnNull_WhenMerchantDoesntExist()
+        public void Get_ShouldReturnNull_WhenMerchantDoesntExist()
         {
             var merchantId = default(Guid);
 

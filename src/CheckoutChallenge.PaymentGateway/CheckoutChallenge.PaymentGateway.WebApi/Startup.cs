@@ -40,12 +40,12 @@ namespace CheckoutChallenge.PaymentGateway.WebApi
             services.AddSingleton<IDatabaseSettings>(serviceProvider => 
                 serviceProvider.GetRequiredService<IOptions<MongoSettings>>().Value);
 
-            //Business Components
             services.AddTransient<IMerchantBc, MerchantBc>();
+            services.AddTransient<IPaymentBc, PaymentBc>();
 
-            //Repositories
             services.AddTransient<IMongoContext, MongoContext>();
             services.AddTransient<IMerchantRepository, MerchantRepository>();
+            services.AddTransient<IPaymentRepository, PaymentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
