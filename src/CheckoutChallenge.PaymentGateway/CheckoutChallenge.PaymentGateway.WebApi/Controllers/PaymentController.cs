@@ -1,6 +1,7 @@
 ﻿using System;
 using CheckoutChallenge.PaymentGateway.Business.Interfaces;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
+using CheckoutChallenge.PaymentGateway.WebApi.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
@@ -24,6 +25,8 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(BadRequestMessage), 400)]
+        [ProducesResponseType(typeof(ConflictMessage), 409)]
         public IActionResult RequestPayment(Payment payment)
         {
             return Ok(_paymentBc.Process(payment));

@@ -25,7 +25,9 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
             var dbMerchant = _merchantRepository.Get(merchant.Name);
             if(dbMerchant != null)
             {
-                throw new MerchantAlreadyExistsException(merchant.Name);
+                throw new BusinessException(
+                    BusinessExceptionCodes.MerchantAlreadyExists, 
+                    $"Merchant {merchant.Name} already exists"); //TODO: Move this to a resource file.
             }
 
             merchant.Id = Guid.NewGuid();

@@ -13,6 +13,7 @@ using CheckoutChallenge.PaymentGateway.Data.Context;
 using CheckoutChallenge.PaymentGateway.Data.MongoDb.Context;
 using CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories;
 using CheckoutChallenge.PaymentGateway.Business.Components;
+using CheckoutChallenge.PaymentGateway.WebApi.Core;
 
 namespace CheckoutChallenge.PaymentGateway.WebApi
 {
@@ -57,7 +58,7 @@ namespace CheckoutChallenge.PaymentGateway.WebApi
             }
 
             app.UseRouting();
-
+            app.UseMiddleware<CustomExceptionMiddleware>();
             app.UseAuthorization();
 
             app.UseSwagger();

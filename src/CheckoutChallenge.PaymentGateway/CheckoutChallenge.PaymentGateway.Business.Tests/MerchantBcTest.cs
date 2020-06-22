@@ -38,7 +38,9 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         {
             var merchant = new Merchant { Name = "Exists" };
 
-            Assert.Throws<MerchantAlreadyExistsException>(() => _merchantBc.Add(merchant));
+            var exception = Assert.Throws<BusinessException>(() => _merchantBc.Add(merchant));
+
+            Assert.Equal(exception.ExceptionCode, BusinessExceptionCodes.MerchantAlreadyExists);
         }
 
         [Fact]
