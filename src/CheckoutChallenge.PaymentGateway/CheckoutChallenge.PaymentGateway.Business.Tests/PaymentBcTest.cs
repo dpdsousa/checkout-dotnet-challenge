@@ -19,7 +19,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
-        public async void Process_ShouldCreatePayment_WhenAllIsWell()
+        public async void Process_ShouldCreateApprovedPayment_WhenAllIsWell()
         {
             //Arrange
             var payment = GeneratePayment();
@@ -30,17 +30,42 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
             //Assert
             Assert.NotNull(createdPayment);
             Assert.NotEqual(default, createdPayment.Id);
+            Assert.Equal(PaymentStatus.Approved, createdPayment.Status);
         }
 
         [Fact]
         public async void Process_ShouldThrowValidationException_WhenPaymentValuesAreWrong()
         {
-            //Arrange
             var payment = GeneratePayment();
             payment.Card.ExpiryYear = 2012;
 
-            //Act
             await Assert.ThrowsAsync<ValidationException>(() => _paymentBc.Process(payment));
+        }
+
+        [Fact]
+        public async void Process_ShouldCreateDeclinedPayment_WhenBankApiReturnBadRequest()
+        {
+            var payment = GeneratePayment();
+            payment.Amount = 717;
+
+            var createdPayment = await _paymentBc.Process(payment);
+
+            Assert.NotNull(createdPayment);
+            Assert.NotEqual(default, createdPayment.Id);
+            Assert.Equal(PaymentStatus.Declined, createdPayment.Status);
+        }
+
+        [Fact]
+        public async void Process_ShouldCreatePaymentWithErrorStatus_WhenBankApiReturnInternalServerError()
+        {
+            var payment = GeneratePayment();
+            payment.Amount = 500;
+
+            var createdPayment = await _paymentBc.Process(payment);
+
+            Assert.NotNull(createdPayment);
+            Assert.NotEqual(default, createdPayment.Id);
+            Assert.Equal(PaymentStatus.Error, createdPayment.Status);
         }
 
         [Fact]

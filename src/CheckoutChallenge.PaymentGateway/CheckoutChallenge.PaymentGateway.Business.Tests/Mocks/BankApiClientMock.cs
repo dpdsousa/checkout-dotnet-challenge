@@ -9,7 +9,29 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests.Mocks
     {
         public Task<BankTransactionInfo> PostTransaction(Payment payment)
         {
-            throw new NotImplementedException();
+            var transactionInfo = new BankTransactionInfo
+            {
+                BankTransactionId = Guid.NewGuid(),
+                Status = PaymentStatus.Approved,
+                ErrorCode = string.Empty,
+                Message = string.Empty
+            };
+
+            if(payment.Amount == 717)
+            {
+                transactionInfo.Message = "Error";
+                transactionInfo.ErrorCode = "ErrorCode";
+                transactionInfo.Status = PaymentStatus.Declined;
+            }
+
+            if (payment.Amount == 500)
+            {
+                transactionInfo.Message = "Error";
+                transactionInfo.ErrorCode = "ErrorCode";
+                transactionInfo.Status = PaymentStatus.Error;
+            }
+
+            return Task.FromResult(transactionInfo);
         }
     }
 }

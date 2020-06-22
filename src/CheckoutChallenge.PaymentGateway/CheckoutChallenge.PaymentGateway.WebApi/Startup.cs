@@ -15,6 +15,7 @@ using CheckoutChallenge.PaymentGateway.Data.MongoDb.Repositories;
 using CheckoutChallenge.PaymentGateway.Business.Components;
 using CheckoutChallenge.PaymentGateway.Domain.ApiClients;
 using System;
+using CheckoutChallenge.PaymentGateway.WebApi.Core.Middleware;
 
 namespace CheckoutChallenge.PaymentGateway.WebApi
 {

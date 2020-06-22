@@ -34,6 +34,12 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
             var transactionResults = await _bankApiClient.PostTransaction(payment);
 
             payment.Id = Guid.NewGuid();
+            payment.Status = transactionResults.Status;
+            payment.BankTransactionId = transactionResults.BankTransactionId;
+            payment.HasError = payment.Status != PaymentStatus.Approved;
+            payment.ErrorCode = transactionResults.ErrorCode;
+            payment.ErrorMessage = transactionResults.Message;
+
             return await _paymentRepository.Add(payment);
         }
     }
