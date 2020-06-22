@@ -1,7 +1,7 @@
-﻿using CheckoutChallenge.PaymentGateway.WebApi.Core;
+﻿using CheckoutChallenge.BankServiceMock.Core;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
+namespace CheckoutChallenge.BankServiceMock.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,7 +14,7 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
             return Ok(new AppStatus
             {
                 Status = "Alive 😉",
-                Message = "Payment controller API up and running",
+                Message = "Bank Service Mock API up and running",
             });
         }
     }
