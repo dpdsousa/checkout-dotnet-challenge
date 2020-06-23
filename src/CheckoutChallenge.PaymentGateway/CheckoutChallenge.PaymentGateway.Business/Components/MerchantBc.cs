@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Components
 {
+    /// <summary>
+    /// MerchantBc - Business Component
+    /// Class responsible for all the business logic related to Merchant functionalities
+    /// </summary>
     public class MerchantBc : IMerchantBc
     {
         private readonly IMerchantRepository _merchantRepository;

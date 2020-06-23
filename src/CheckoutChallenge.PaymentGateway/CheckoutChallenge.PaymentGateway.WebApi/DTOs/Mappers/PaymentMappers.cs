@@ -1,5 +1,7 @@
 ﻿using CheckoutChallenge.PaymentGateway.Domain.Entities;
-using System.Data.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CheckoutChallenge.PaymentGateway.WebApi.DTOs.Mappers
 {
@@ -46,6 +48,33 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.DTOs.Mappers
                     Number = payment.Card.Number
                 }
             };
+        }
+
+        public static IEnumerable<PaymentDto> Map(IEnumerable<Payment> payments)
+        {
+            return payments.Select(payment =>
+            {
+                return new PaymentDto
+                {
+                    Id = payment.Id,
+                    Amount = payment.Amount,
+                    Currency = payment.Currency,
+                    MerchantId = payment.MerchantId,
+                    ErrorCode = payment.ErrorCode,
+                    ErrorMessage = payment.ErrorMessage,
+                    HasError = payment.HasError,
+                    Status = payment.Status.ToString(),
+                    CreatedOn = payment.CreatedOn,
+                    Card = new CardDto
+                    {
+                        Cvv = payment.Card.Cvv,
+                        ExpiryMonth = payment.Card.ExpiryMonth,
+                        ExpiryYear = payment.Card.ExpiryYear,
+                        HolderName = payment.Card.HolderName,
+                        Number = payment.Card.Number
+                    }
+                };
+            });
         }
     }
 }

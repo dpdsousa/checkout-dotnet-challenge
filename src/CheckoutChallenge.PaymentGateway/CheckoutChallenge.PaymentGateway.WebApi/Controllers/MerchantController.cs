@@ -22,12 +22,14 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [ProducesResponseType(typeof(MerchantDto), 200)]
         public async Task<IActionResult> Get(Guid id)
         {
             return Ok(MerchantMappers.Map(await _merchantBc.Get(id)));
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(MerchantDto), 200)]
         [ProducesResponseType(typeof(BadRequestMessage), 400)]
         [ProducesResponseType(typeof(ConflictMessage), 409)]
         public async Task<IActionResult> Create(CreateMerchantDto merchant)

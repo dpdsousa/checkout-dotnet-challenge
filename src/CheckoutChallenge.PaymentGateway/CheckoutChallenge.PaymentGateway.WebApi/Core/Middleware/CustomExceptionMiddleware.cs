@@ -69,8 +69,6 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Core.Middleware
                 return context.Response.WriteAsync(validationErrorMessage);
             }
 
-            _logger.LogError(exception.ToString());
-
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             var internalErrorMessage = JsonConvert.SerializeObject(new { Message = "Internal server error" }, Formatting.None);
             return context.Response.WriteAsync(internalErrorMessage);

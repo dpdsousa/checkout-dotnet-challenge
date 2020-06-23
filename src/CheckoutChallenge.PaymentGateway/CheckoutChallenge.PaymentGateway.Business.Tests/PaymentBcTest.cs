@@ -3,6 +3,7 @@ using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using CheckoutChallenge.PaymentGateway.Domain.Exceptions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 using Xunit;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Tests
@@ -110,6 +111,21 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
             var payment = await _paymentBc.Get(paymentId);
 
             Assert.Null(payment);
+        }
+
+        [Fact]
+        public async void GetByMerchantId_ShouldReturnAList_IfPaymentsExistForTheDesiredMerchant()
+        { 
+            var merchantId = Guid.NewGuid();
+
+            var payments = await _paymentBc.GetByMerchantId(merchantId);
+
+            Assert.NotNull(payments);
+            Assert.Equal(2, payments.Count());
+            foreach (var item in payments)
+            {
+                Assert.Equal(merchantId, item.MerchantId);
+            }
         }
 
         private Payment GeneratePayment()

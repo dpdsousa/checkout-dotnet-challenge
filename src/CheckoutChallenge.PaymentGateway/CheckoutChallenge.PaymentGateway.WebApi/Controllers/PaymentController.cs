@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CheckoutChallenge.PaymentGateway.Business.Interfaces;
 using CheckoutChallenge.PaymentGateway.WebApi.Core;
@@ -21,12 +22,21 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [ProducesResponseType(typeof(PaymentDto), 200)]
         public async Task<IActionResult> Get(Guid id)
         {
             return Ok(PaymentMappers.Map(await _paymentBc.Get(id)));
         }
 
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<PaymentDto>), 200)]
+        public async Task<IActionResult> GetByMerchantId([FromQuery] Guid merchantId)
+        {
+            return Ok(PaymentMappers.Map(await _paymentBc.GetByMerchantId(merchantId)));
+        }
+
         [HttpPost]
+        [ProducesResponseType(typeof(PaymentDto), 200)]
         [ProducesResponseType(typeof(BadRequestMessage), 400)]
         [ProducesResponseType(typeof(ConflictMessage), 409)]
         public async Task<IActionResult> RequestPayment(PaymentRequestDto paymentRequest)

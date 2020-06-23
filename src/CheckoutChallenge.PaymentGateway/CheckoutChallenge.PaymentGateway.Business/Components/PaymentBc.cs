@@ -6,10 +6,15 @@ using CheckoutChallenge.PaymentGateway.Domain.Entities;
 using CheckoutChallenge.PaymentGateway.Domain.Exceptions;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CheckoutChallenge.PaymentGateway.Business.Components
 {
+    /// <summary>
+    /// PaymentBc - Business Component
+    /// Class responsible for all the business logic related to payments functionalities
+    /// </summary>
     public class PaymentBc : IPaymentBc
     {
         private readonly IPaymentRepository _paymentRepository;
@@ -32,6 +37,11 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
         public async Task<Payment> Get(Guid id)
         {
             return await _paymentRepository.Get(id);
+        }
+
+        public async Task<IEnumerable<Payment>> GetByMerchantId(Guid merchantId)
+        {
+            return await _paymentRepository.GetByMerchantId(merchantId);
         }
 
         public async Task<Payment> Process(Payment payment)
