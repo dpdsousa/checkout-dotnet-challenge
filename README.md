@@ -1,4 +1,4 @@
-![Build and Test](https://github.com/dpdsousa/checkout-dotnet-challenge/workflows/Build%20and%20Test/badge.svg?branch=develop)
+![Build and Test](https://github.com/dpdsousa/checkout-dotnet-challenge/workflows/Build%20and%20Test/badge.svg?branch=master)
 # Checkout.Com .Net Challenge - Payment Gateway 
 ## About the project
 This is a Payment Gateway that enables merchants to request payments to a specific bank.
