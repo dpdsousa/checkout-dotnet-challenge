@@ -19,6 +19,16 @@ To run these containers it's necessary to have Docker installed and to execute t
 ```
 docker-compose up
 ```
+After the containers are up are running it is possible to use Swagger's interface to test the API.
+* http://localhost:4000/swagger
+
+## API - Authentication
+### Token
+I've implemented this method to facilitate obtaining access tokens that allow access to the other private API requests.
+
+| Endpoint  | Method | Auth required |
+| :---: | :---: | :---: |
+| `/api/Authentication/`  | `POST`  | `NO` |   
 
 ## API - Payments
 ### Get payment by id
