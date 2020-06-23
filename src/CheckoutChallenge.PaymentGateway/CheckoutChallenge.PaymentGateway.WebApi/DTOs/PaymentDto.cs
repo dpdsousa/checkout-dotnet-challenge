@@ -13,5 +13,6 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.DTOs
         public bool HasError { get; set; }
         public string ErrorCode { get; set; }
         public string ErrorMessage { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 }

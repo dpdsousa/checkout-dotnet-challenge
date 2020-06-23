@@ -31,7 +31,7 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
         [ProducesResponseType(typeof(ConflictMessage), 409)]
         public async Task<IActionResult> RequestPayment(PaymentRequestDto paymentRequest)
         {
-            return Ok(await _paymentBc.Process(PaymentMappers.Map(paymentRequest)));
+            return Ok(PaymentMappers.Map(await _paymentBc.Process(PaymentMappers.Map(paymentRequest))));
         }
     }
 }

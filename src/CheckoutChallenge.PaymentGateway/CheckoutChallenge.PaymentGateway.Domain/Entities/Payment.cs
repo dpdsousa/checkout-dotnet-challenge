@@ -5,7 +5,7 @@ namespace CheckoutChallenge.PaymentGateway.Domain.Entities
 {
     public class Payment : IdModel<Guid>
     {
-        public Guid IdempotencyId { get; set; } //TODO: Use this!
+        public Guid IdempotencyId { get; set; }
         public Guid BankTransactionId { get; set; }
         public Guid MerchantId { get; set; }
         public decimal Amount { get; set; }
@@ -15,6 +15,7 @@ namespace CheckoutChallenge.PaymentGateway.Domain.Entities
         public bool HasError { get; set; }
         public string ErrorCode { get; set; }
         public string ErrorMessage { get; set; }
-
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

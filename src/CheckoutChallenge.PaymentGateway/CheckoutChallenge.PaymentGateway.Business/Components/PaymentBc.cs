@@ -48,7 +48,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
             {
                 throw new BusinessException(
                     BusinessExceptionCodes.MerchantHasNoContract,
-                    "This Merchant has no contract with this company. We cannot accept payment requests.");
+                    "This Merchant has no contract with us, therefore we cannot accept payment requests.");
             }
 
             var paymentValidator = new PaymentValidator();
@@ -64,6 +64,8 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
             payment.HasError = payment.Status != PaymentStatus.Approved;
             payment.ErrorCode = transactionResults.ErrorCode;
             payment.ErrorMessage = transactionResults.Message;
+            payment.CreatedOn = DateTime.UtcNow;
+            payment.UpdatedOn = DateTime.UtcNow;
 
             return await _paymentRepository.Add(payment);
         }

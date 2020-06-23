@@ -36,6 +36,7 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.DTOs.Mappers
                 ErrorMessage = payment.ErrorMessage,
                 HasError = payment.HasError,
                 Status = payment.Status.ToString(),
+                CreatedOn = payment.CreatedOn,
                 Card = new CardDto
                 {
                     Cvv = payment.Card.Cvv,
