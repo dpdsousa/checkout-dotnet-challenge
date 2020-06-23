@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+    mongoDb:
+        image: mongo:4.2.8
+        container_name: Container_MongoDB
+        restart: always
+        ports:
+            - 27017:27017
+
+    bankMockApi:
+        image: ${DOCKER_REGISTRY-}checkoutchallengebankservicemock
+        container_name: Container_BankMockApi
+        build:
+            context: .
+            dockerfile: CheckoutChallenge.BankServiceMock/Dockerfile
+
+    paymentGatewayApi:
+        image: ${DOCKER_REGISTRY-}checkoutchallengepaymentgatewaywebapi
+        container_name: Container_PaymentGatewayApi
+        build:
+            context: .
+            dockerfile: CheckoutChallenge.PaymentGateway.WebApi/Dockerfile
+        depends_on:
+            - bankMockApi
+            - mongoDb

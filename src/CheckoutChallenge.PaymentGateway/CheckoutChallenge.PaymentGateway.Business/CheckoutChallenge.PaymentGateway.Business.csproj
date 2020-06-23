@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.6.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Data\CheckoutChallenge.PaymentGateway.Data.csproj" />
+    <ProjectReference Include="..\CheckoutChallenge.PaymentGateway.Domain\CheckoutChallenge.PaymentGateway.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
