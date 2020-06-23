@@ -68,9 +68,10 @@ Endpoint used to create a new merchant.
 | `/api/merchant/`  | `POST`  | `Yes` |   
 
 ## Future improvements
-* Investigate more about it and implement performance tests.
+* Investigate more about performance tests and implement them.
 * Add application metrics.
 * Currently i'm storing the sensitive fields (Card Number, CVV, etc) on the database without any encryption. It's necessary to encrypt it or maybe even remove such information.
 * Improve the current validations (Currency codes, Card Numbers, etc).
+* Improve CI. Currently it's a basic workflow on Github Action that builds the project and runs the tests.
 
 
