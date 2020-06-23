@@ -4,5 +4,6 @@
     {
         public const string MerchantAlreadyExists = nameof(MerchantAlreadyExists);
 
+        public const string MerchantHasNoContract = nameof(MerchantHasNoContract);
     }
 }

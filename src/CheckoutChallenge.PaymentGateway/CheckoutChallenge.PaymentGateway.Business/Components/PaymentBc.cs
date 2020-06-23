@@ -3,6 +3,7 @@ using CheckoutChallenge.PaymentGateway.Business.Validators;
 using CheckoutChallenge.PaymentGateway.Data.Repositories;
 using CheckoutChallenge.PaymentGateway.Domain.ApiClients;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
+using CheckoutChallenge.PaymentGateway.Domain.Exceptions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -12,12 +13,18 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
     public class PaymentBc : IPaymentBc
     {
         private readonly IPaymentRepository _paymentRepository;
+        private readonly IMerchantRepository _merchantRepository;
         private readonly IBankApiClient _bankApiClient;
         private readonly ILogger<PaymentBc> _logger;
 
-        public PaymentBc(IPaymentRepository paymentRepository, IBankApiClient bankApiClient, ILogger<PaymentBc> logger)
+        public PaymentBc(
+            IPaymentRepository paymentRepository, 
+            IMerchantRepository merchantRepository,
+            IBankApiClient bankApiClient, 
+            ILogger<PaymentBc> logger)
         {
             _paymentRepository = paymentRepository;
+            _merchantRepository = merchantRepository;
             _bankApiClient = bankApiClient;
             _logger = logger;
         }
@@ -34,6 +41,14 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
             {
                 _logger.LogWarning($"IDEMPOTENT :: An identical request was already made for this Payment (Id - {dbPayment.Id}");
                 return dbPayment;
+            }
+
+            var dbMerchant = await _merchantRepository.Get(payment.MerchantId);
+            if(dbMerchant == null)
+            {
+                throw new BusinessException(
+                    BusinessExceptionCodes.MerchantHasNoContract,
+                    "This Merchant has no contract with this company. We cannot accept payment requests.");
             }
 
             var paymentValidator = new PaymentValidator();

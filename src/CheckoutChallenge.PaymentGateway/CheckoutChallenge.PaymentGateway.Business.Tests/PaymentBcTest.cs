@@ -69,7 +69,7 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
-        public async void Process_ShouldRetunrExistingPayment_WhenIdenticalRequestIsMade()
+        public async void Process_ShouldReturnExistingPayment_WhenIdenticalRequestIsMade()
         {
             var payment = GeneratePayment();
             payment.IdempotencyId = Guid.NewGuid();
@@ -78,6 +78,17 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
 
             Assert.NotNull(existingPayment);
             Assert.Equal(payment.IdempotencyId, existingPayment.IdempotencyId);
+        }
+
+        [Fact]
+        public async void Process_ShouldThrowBusinessException_WhenMerchantDoesNotExist()
+        {
+            var payment = GeneratePayment();
+            payment.MerchantId = default(Guid);
+
+            var exception = await Assert.ThrowsAsync<BusinessException>(() => _paymentBc.Process(payment));
+
+            Assert.Equal(exception.ExceptionCode, BusinessExceptionCodes.MerchantHasNoContract);
         }
 
         [Fact]
