@@ -1,9 +1,9 @@
 ![Build and Test](https://github.com/dpdsousa/checkout-dotnet-challenge/workflows/Build%20and%20Test/badge.svg?branch=develop)
 # Checkout.Com .Net Challenge - Payment Gateway 
-## About The Project
+## About the project
 This is a Payment Gateway that enables merchants to request payments to a specific bank.
 
-### Built With
+### Built with
 * [Microsoft Visual Studio Community 2019](https://visualstudio.microsoft.com/vs/community/)
 * [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/thank-you/sdk-3.1.301-windows-x64-installer)
 * [Docker](https://www.docker.com/products/docker-desktop)
@@ -66,5 +66,11 @@ Endpoint used to create a new merchant.
 | Endpoint  | Method | Auth required |
 | :---: | :---: | :---: |
 | `/api/merchant/`  | `POST`  | `Yes` |   
+
+## Future improvements
+* Investigate more about it and implement performance tests.
+* Add application metrics.
+* Currently i'm storing the sensitive fields (Card Number, CVV, etc) on the database without any encryption. It's necessary to encrypt it or maybe even remove such information.
+* Improve the current validations (Currency codes, Card Numbers, etc).
 
 
