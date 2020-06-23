@@ -20,7 +20,7 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
             _appSettings = appSettings;
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Token()
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.Value.Secret));
