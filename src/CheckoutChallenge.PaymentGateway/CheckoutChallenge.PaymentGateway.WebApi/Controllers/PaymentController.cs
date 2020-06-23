@@ -5,6 +5,7 @@ using CheckoutChallenge.PaymentGateway.Business.Interfaces;
 using CheckoutChallenge.PaymentGateway.WebApi.Core;
 using CheckoutChallenge.PaymentGateway.WebApi.DTOs;
 using CheckoutChallenge.PaymentGateway.WebApi.DTOs.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
@@ -20,6 +21,7 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
             _paymentBc = paymentBc;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(typeof(PaymentDto), 200)]
@@ -28,6 +30,7 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
             return Ok(PaymentMappers.Map(await _paymentBc.Get(id)));
         }
 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<PaymentDto>), 200)]
         public async Task<IActionResult> GetByMerchantId([FromQuery] Guid merchantId)
@@ -35,6 +38,7 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
             return Ok(PaymentMappers.Map(await _paymentBc.GetByMerchantId(merchantId)));
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(typeof(PaymentDto), 200)]
         [ProducesResponseType(typeof(BadRequestMessage), 400)]
