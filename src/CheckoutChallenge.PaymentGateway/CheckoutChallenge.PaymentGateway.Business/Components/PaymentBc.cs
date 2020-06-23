@@ -3,6 +3,7 @@ using CheckoutChallenge.PaymentGateway.Business.Validators;
 using CheckoutChallenge.PaymentGateway.Data.Repositories;
 using CheckoutChallenge.PaymentGateway.Domain.ApiClients;
 using CheckoutChallenge.PaymentGateway.Domain.Entities;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -12,11 +13,13 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
     {
         private readonly IPaymentRepository _paymentRepository;
         private readonly IBankApiClient _bankApiClient;
+        private readonly ILogger<PaymentBc> _logger;
 
-        public PaymentBc(IPaymentRepository paymentRepository, IBankApiClient bankApiClient)
+        public PaymentBc(IPaymentRepository paymentRepository, IBankApiClient bankApiClient, ILogger<PaymentBc> logger)
         {
             _paymentRepository = paymentRepository;
             _bankApiClient = bankApiClient;
+            _logger = logger;
         }
 
         public async Task<Payment> Get(Guid id)
@@ -26,6 +29,13 @@ namespace CheckoutChallenge.PaymentGateway.Business.Components
 
         public async Task<Payment> Process(Payment payment)
         {
+            var dbPayment = await _paymentRepository.GetByIdempotencyId(payment.IdempotencyId);
+            if(dbPayment != null)
+            {
+                _logger.LogWarning($"IDEMPOTENT :: An identical request was already made for this Payment (Id - {dbPayment.Id}");
+                return dbPayment;
+            }
+
             var paymentValidator = new PaymentValidator();
             var validationResult = paymentValidator.Validate(payment);
 

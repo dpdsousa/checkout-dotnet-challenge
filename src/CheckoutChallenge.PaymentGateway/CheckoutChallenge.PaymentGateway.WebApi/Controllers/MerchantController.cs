@@ -27,7 +27,6 @@ namespace CheckoutChallenge.PaymentGateway.WebApi.Controllers
             return Ok(MerchantMappers.Map(await _merchantBc.Get(id)));
         }
 
-        //TODO: Add DTOs and handle responses
         [HttpPost]
         [ProducesResponseType(typeof(BadRequestMessage), 400)]
         [ProducesResponseType(typeof(ConflictMessage), 409)]

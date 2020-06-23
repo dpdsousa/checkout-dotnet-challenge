@@ -12,6 +12,8 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         public static ServiceProvider ConfigServices()
         {
             var services = new ServiceCollection();
+            
+            services.AddLogging();
 
             services.AddTransient<IMerchantBc, MerchantBc>();
             services.AddTransient<IPaymentBc, PaymentBc>();

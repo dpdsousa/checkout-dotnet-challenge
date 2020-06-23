@@ -69,6 +69,18 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
         }
 
         [Fact]
+        public async void Process_ShouldRetunrExistingPayment_WhenIdenticalRequestIsMade()
+        {
+            var payment = GeneratePayment();
+            payment.IdempotencyId = Guid.NewGuid();
+
+            var existingPayment = await _paymentBc.Process(payment);
+
+            Assert.NotNull(existingPayment);
+            Assert.Equal(payment.IdempotencyId, existingPayment.IdempotencyId);
+        }
+
+        [Fact]
         public async void Get_ShouldReturnPayment_IfPaymentExists()
         {
             var paymentId = Guid.NewGuid();
@@ -103,7 +115,8 @@ namespace CheckoutChallenge.PaymentGateway.Business.Tests
                     HolderName = "Random Name",
                     Number = "1234-1234-1234-1234"
                 },
-                Status = PaymentStatus.Approved
+                Status = PaymentStatus.Approved,
+                MerchantId = Guid.NewGuid()
             };
         }
     }
