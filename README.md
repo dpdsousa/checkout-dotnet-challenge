@@ -1,7 +1,7 @@
 ![Build and Test](https://github.com/dpdsousa/checkout-dotnet-challenge/workflows/Build%20and%20Test/badge.svg?branch=develop)
 # Checkout.Com .Net Challenge - Payment Gateway 
 ## About The Project
-This project consists of a Payment Gateway that enables merchants to request payments to a specific bank.
+This is a Payment Gateway that enables merchants to request payments to a specific bank.
 
 ### Built With
 * [Microsoft Visual Studio Community 2019](https://visualstudio.microsoft.com/vs/community/)
@@ -20,7 +20,7 @@ To run these containers it's necessary to have Docker installed and to execute t
 docker-compose up
 ```
 
-## API
+## API - Payments
 ### Get payment by id
 Retrieves the payment details with the corresponding Id.
 
@@ -42,19 +42,19 @@ Endpoint used by the merchants to request a payment.
 | :---: | :---: | :---: |
 | `/api/payment/`  | `POST`  | `Yes` |   
 
-  **Request sample**
-```
-{
-  "merchantId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  "idempotencyId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  "amount": 10,
-  "currency": "EUR",
-  "card": {
-    "number": "1234 1234 1234",
-    "expiryMonth": 12,
-    "expiryYear": 2021,
-    "cvv": "123",
-    "holderName": "Random name"
-  }
-}
-```
+## API - Merchants
+### Get merchant by id
+Retrieves the merchant with the corresponding Id.
+
+| Endpoint  | Method | Auth required |
+| :---: | :---: | :---: |
+| `/api/merchant/{:id}`  | `GET`  | `Yes` |   
+
+### Create merchant
+Endpoint used to create a new merchant.
+
+| Endpoint  | Method | Auth required |
+| :---: | :---: | :---: |
+| `/api/merchant/`  | `POST`  | `Yes` |   
+
+
